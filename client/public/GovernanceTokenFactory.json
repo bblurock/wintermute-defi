@@ -1,6 +1,6 @@
 {
-  "contractName": "vaultfactory",
-  "sourceName": "contracts/vault/vaultfactory.sol",
+  "contractName": "governancetokenfactory",
+  "sourceName": "contracts/governance/governancetokenfactory.sol",
   "abi": [
     {
       "anonymous": false,
@@ -24,8 +24,21 @@
           "type": "uint256"
         }
       ],
-      "name": "vaultcreated",
+      "name": "tokencreated",
       "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "alltokenlength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "nooftokenscreated",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "inputs": [
@@ -35,7 +48,7 @@
           "type": "uint256"
         }
       ],
-      "name": "allvaults",
+      "name": "alltokens",
       "outputs": [
         {
           "internalType": "address",
@@ -47,34 +60,31 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "allvaultslength",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "noofvaultscreated",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "string",
-          "name": "name",
+          "name": "namegovernancetkn",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "symbolgovernancetkn",
           "type": "string"
         },
         {
           "internalType": "uint256",
-          "name": "userpay",
+          "name": "maxsupply",
           "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "vaultAddress",
+          "type": "address"
         }
       ],
-      "name": "createvault",
+      "name": "creategovernancetoken",
       "outputs": [],
-      "stateMutability": "payable",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -85,7 +95,7 @@
           "type": "string"
         }
       ],
-      "name": "getvault",
+      "name": "gettoken",
       "outputs": [
         {
           "internalType": "address",

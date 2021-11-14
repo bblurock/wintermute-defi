@@ -2,9 +2,11 @@ import Web3 from 'web3'
 import Head from 'next/head'
 import styled from '@emotion/styled'
 import { useEffect, useState, useCallback } from 'react'
+import { utils } from "ethers";
+
 
 import { RepeatIcon } from '@chakra-ui/icons'
-import { Button, Box, Flex, IconButton, Text, Input } from '@chakra-ui/react';
+import { FormControl, FormLabel, Button, Box, Flex, IconButton, Text, Input } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -27,6 +29,8 @@ function Home() {
   const title = 'Creating your Vault - OSE.FINANCE'
   const [etherBalance, setEtherBalance] = useState(0)
   const [depositAmount, setDepositAmount] = useState(0.0)
+  const [userpay, setMinimumUserpay] = useState()
+  const [vaultName, setVaultName] = useState('')
 
   const [web3, setWeb3] = useState()
   const contractAddress = process.env.NEXT_PUBLIC_VAULT_FACTORY_CONTRACT_ADDRESS_RINKEBY
@@ -42,7 +46,8 @@ function Home() {
   const onCreateVault = useCallback(async () => {
     console.log(contract)
     if (contract) {
-      const result = await contract.methods.createvault(TOKEN_NAME).send({
+      const _userpay = utils.parseEther(userpay);
+      const result = await contract.methods.createvault(vaultName, _userpay).send({
         from: account,
         value: 9 * 1e15
       })
@@ -120,6 +125,36 @@ function Home() {
               display="flex"
               flexDirection="column"
             >
+              <FormControl id="vault-name" isRequired>
+                <FormLabel>Vault name</FormLabel>
+                <Box bg="white" borderRadius="lg" display="flex" p={3} my={1}>
+                  <Input
+                    value={vaultName}
+                    onChange={e => setVaultName(e.target.value)}
+                    placeholder="Please input your Vault Name"
+                    variant="unstyled"
+                  />
+                </Box>
+
+                <FormLabel mt={4}>Minimum Required Deposit</FormLabel>
+                <Box bg="white" borderRadius="lg" display="flex" p={3} my={1}>
+                  <Input
+                    placeholder="Minimum deposit for your Vault, e.g: 0.05 ETH"
+                    value={userpay}
+                    onChange={e => setMinimumUserpay(e.target.value)}
+                    variant="unstyled"
+                  />
+                </Box>
+              </FormControl>
+            </Box>
+            <Box
+              mb={4}
+              p={3}
+              bg="#e8e5d8"
+              borderRadius="md"
+              display="flex"
+              flexDirection="column"
+            >
               <Box display="flex" mb={1}>
                 <div className={styles.coinImage}>
                   <Image
@@ -139,18 +174,9 @@ function Home() {
                     variant="unstyled"
                     placeholder="0.0"
                     value={0.009}
-                    disabled
                     onChange={e => setDepositAmount(e.target.value)}
+                    disabled
                   />
-                  {/* <Button
-                    px={3}
-                    py={1}
-                    border="1px solid #949494"
-                    borderRadius={16}
-                    onClick={setInputMax}
-                  >
-                    Max
-                  </Button> */}
                 </Box>
               </Box>
               <Box textAlign="right">
