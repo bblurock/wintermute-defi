@@ -23,17 +23,15 @@ const TOKEN_NAME = "OSE"
 
 function Home() {
   const [provider] = useWeb3Modal()
-  const account = useSelector((state: RootState) =>  state.global.account)
+  const account = useSelector((state) =>  state.global.account)
   const title = 'Creating your Vault - OSE.FINANCE'
   const [etherBalance, setEtherBalance] = useState(0)
   const [depositAmount, setDepositAmount] = useState(0.0)
 
   const [web3, setWeb3] = useState()
   const contractAddress = process.env.NEXT_PUBLIC_VAULT_FACTORY_CONTRACT_ADDRESS_RINKEBY
-  const abiItems: AbiItem[] = web3 && VaultFactoryContract.abi as AbiItem[]
+  const abiItems = web3 && VaultFactoryContract.abi
   const contract = web3 && contractAddress && new web3.eth.Contract(abiItems, contractAddress)
-
-  console.log(contract)
 
   useEffect(() => {
     if (provider) {
@@ -42,6 +40,7 @@ function Home() {
   }, [provider])
 
   const onCreateVault = useCallback(async () => {
+    console.log(contract)
     if (contract) {
       const result = await contract.methods.createvault(TOKEN_NAME).send({
         from: account,

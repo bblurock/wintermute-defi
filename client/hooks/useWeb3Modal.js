@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Web3Modal from 'web3modal'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/store'
 import { clearState } from '../store/globalSlice'
 
 // Enter a valid infura key here to avoid being rate limited
@@ -48,11 +47,7 @@ function useWeb3Modal(config = {}) {
 
   const logoutOfWeb3Modal = useCallback(
     async function () {
-      console.log('clearState 1')
-
       await web3Modal.clearCachedProvider();
-
-      console.log('clearState 2')
       dispatch(clearState());
       window.location.reload();
     },

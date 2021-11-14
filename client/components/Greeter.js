@@ -15,7 +15,7 @@ export default function Greeter() {
   // const { globalState, dispatch } = useContext(globalContext)
   const [provider] = useWeb3Modal()
   const [web3, setWeb3] = useState()
-  const account = useSelector((state: RootState) =>  state.global.account)
+  const account = useSelector(state =>  state.global.account)
 
   const dispatch = useDispatch()
 
@@ -29,17 +29,17 @@ export default function Greeter() {
   const [greetingText, setGreetingText] = useState("")
   const [greetingOutput, setGreetingOutput] = useState("")
   const [greetingButtonLoading, greetingButton] = useButton(setGreeting, 'Set Greeting')
-  const [greeting, greetingInput] = useInput(greetingButtonLoading as boolean)
+  const [greeting, greetingInput] = useInput(greetingButtonLoading)
   const [greetButtonLoading, greetButton] = useButton(handleGreet, 'Greet')
-  const [greet, greetInput] = useInput(greetButtonLoading as boolean)
+  const [greet, greetInput] = useInput(greetButtonLoading)
   const contractAddress = process.env.NEXT_PUBLIC_GREETER_CONTRACT_ADDRESS_RINKEBY
-  const abiItems: AbiItem[] = web3 && GreeterContract.abi as AbiItem[]
+  const abiItems = web3 && GreeterContract.abi
   const contract = web3 && contractAddress && new web3.eth.Contract(abiItems, contractAddress)
 
   function getGreeting() {
     if (contract) {
       console.log('getGreeting', contract.methods.greeting())
-      contract.methods.greeting().call().then((result: any) => {
+      contract.methods.greeting().call().then((result) => {
         setGreetingText(result)
       });
     }

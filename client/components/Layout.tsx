@@ -64,15 +64,12 @@ function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
     fetchAccount();
   }, [account, provider, setRendered, dispatch]);
 
-  console.log(provider)
-
   return (
     <StyledButton
       onClick={() => {
         if (!provider) {
           loadWeb3Modal();
         } else {
-          console.log('proceeding logout')
           logoutOfWeb3Modal();
         }
       }}

@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "store/globalSlice.js"  ],
+, "store/globalSlice.js", "pages/vault.tsx", "components/Greeter.js", "hooks/useWeb3Modal.js"  ],
   "exclude": [
     "node_modules"
   ]
