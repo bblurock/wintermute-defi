@@ -142,7 +142,7 @@ export default function AccountModal({ isOpen, onClose }: Props) {
                   color: "whiteAlpha.800",
                   textDecoration: "underline",
                 }}
-              >  
+              >
                 <ExternalLinkIcon mr={1} />
                 View on Explorer
               </Link>:''

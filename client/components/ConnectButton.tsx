@@ -19,14 +19,14 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   async function handleConnectWallet(wallet: string)  {
     wallet === 'WalletConnect' ? setWalletConnectLoading(true) : setLoading(true)
     try {
-      const { account, web3 } = wallet === 'WalletConnect' ? 
+      const { account, web3 } = wallet === 'WalletConnect' ?
         await handleWalletConnect(dispatch):
         await handleInjectedProvider(dispatch)
       const balance = await web3.eth.getBalance(account)
       console.log('balance', balance)
       setEtherBalance(parseInt(balance)/1e18)
     } catch (error) {
-      console.error(error)  
+      console.error(error)
     } finally {
       wallet === 'WalletConnect' ? setWalletConnectLoading(false) : setLoading(false)
     }
@@ -43,7 +43,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
     >
       <Box px="3">
         <Text color="white" fontSize="md">
-          {etherBalance.toFixed(3)} ETH
+          {etherBalance.toFixed(5)} ETH
         </Text>
       </Box>
       <Button
@@ -72,29 +72,21 @@ export default function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-    <SimpleGrid mt={3} columns={2} spacing={3}>
+
       <Button
         isLoading={loading}
         spinner={<BeatLoader size={8} color="white" />}
         onClick={() => handleConnectWallet('MetaMask')}
-        bg="blue.800"
-        color="blue.300"
+        bg="#7de78e"
+        color="black"
         fontSize="lg"
         fontWeight="medium"
         borderRadius="xl"
         border="1px solid transparent"
-        _hover={{
-          borderColor: "blue.700",
-          color: "blue.400",
-        }}
-        _active={{
-          backgroundColor: "blue.800",
-          borderColor: "blue.700",
-        }}
       >
         Connect with MetaMask
       </Button>
-      <Button
+      {/* <Button
         isLoading={walletConnectLoading}
         spinner={<BeatLoader size={8} color="white" />}
         onClick={() => handleConnectWallet('WalletConnect')}
@@ -114,7 +106,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         }}
       >
         Connect with WalletConnect
-      </Button>
-    </SimpleGrid>
+      </Button> */}
+
   );
 }

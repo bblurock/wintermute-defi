@@ -1,0 +1,17 @@
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  min-width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coinImage img {
+  border-radius: 6px;
+}
+
+.coinImage > div {
+  vertical-align: top;
+}

@@ -1,16 +1,17 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { Component } from 'react'
+import styled from '@emotion/styled'
+
+import { Button, Box, Center } from '@chakra-ui/react';
+import Link from 'next/link'
+
+import styles from '../styles/Home.module.css'
 import Layout from '../components/Layout'
-import ConnectButton from '../components/ConnectButton'
-import { useDisclosure } from '@chakra-ui/react'
-import AccountModal from '../components/AccountModal'
 import Greeter from '../components/Greeter'
 
 function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const title = 'OSE Finance - Community-led asset management'
 
-  const title = 'Ethereum dApps Next.js Boiletplate'
   return (
     <Layout>
       <Head>
@@ -22,31 +23,25 @@ function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://github.com/limcheekin/eth-dapps-nextjs-boiletplate">{title}</a>
+          Community Governance Asset Management Fund
         </h1>
 
         <p className={styles.description}>
-          A simple dApps to demo the integration of MetaMask, WalletConnect and Greeter smart contract.
+          Create your own fund with OSE Vault today and deoploye your best crosschaing De-Fi strategies.
         </p>
 
-        {
-        // Our connect button will only handle opening
-        }
-        <ConnectButton handleOpenModal={onOpen} />
-        {
-        // Our Account modal will handle open state & closing
-        }
-        <AccountModal isOpen={isOpen} onClose={onClose} />
-        <Greeter />
+        <Box w="100%" p={6}>
+          <Center>
+            <Link href="/vault" passHref>
+              <Button colorScheme="teal" size="lg">
+                Create Vault
+              </Button>
+            </Link>
+          </Center>
+        </Box>
+
       </main>
 
-      <footer className={styles.footer}>
-        Powered by{' '}
-        <img className={styles.logo} src="/logos/ethereum.png" alt="Ethereum Logo" width="144" height="32" />
-        <img className={styles.logo} src="/logos/nextjs.png" alt="NextJS Logo" width="64" height="32" />
-        <img className={styles.logo} src="/logos/metamask.png" alt="MetaMask Logo" width="128" height="32" />
-        <img className={styles.logo} src="/logos/walletconnect.png" alt="WalletConnect Logo" width="128" height="32" />
-      </footer>
     </Layout>
   )
 }
