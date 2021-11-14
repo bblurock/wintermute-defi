@@ -72,21 +72,29 @@ export default function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-
+    <SimpleGrid mt={3} columns={2} spacing={3}>
       <Button
         isLoading={loading}
         spinner={<BeatLoader size={8} color="white" />}
         onClick={() => handleConnectWallet('MetaMask')}
-        bg="#7de78e"
-        color="black"
+        bg="blue.800"
+        color="blue.300"
         fontSize="lg"
         fontWeight="medium"
         borderRadius="xl"
         border="1px solid transparent"
+        _hover={{
+          borderColor: "blue.700",
+          color: "blue.400",
+        }}
+        _active={{
+          backgroundColor: "blue.800",
+          borderColor: "blue.700",
+        }}
       >
         Connect with MetaMask
       </Button>
-      {/* <Button
+      <Button
         isLoading={walletConnectLoading}
         spinner={<BeatLoader size={8} color="white" />}
         onClick={() => handleConnectWallet('WalletConnect')}
@@ -106,7 +114,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         }}
       >
         Connect with WalletConnect
-      </Button> */}
-
+      </Button>
+    </SimpleGrid>
   );
 }
